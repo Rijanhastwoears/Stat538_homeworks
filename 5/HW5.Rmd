@@ -1,0 +1,237 @@
+---
+title: "BZAN 540 - HW5"
+author: "FirstName LastName"
+output: word_document
+---
+
+```{r include=FALSE}
+
+#Press (Ctrl + Shift + the letter O) to see all double hashtags on the right of this window.
+
+#There is an r-chunk available for every question but that does NOT mean that an r-chunk is needed for each question.
+
+#Some questions will only require a written response.
+
+```
+
+##F3.2
+
+Thirty samples of cheddar cheese were analyzed for their content of acetic acid, hydrogen sulfide and lactic acid. Each sample was tasted and scored by a panel of judges and the average taste score produced. Use the *cheddar* data to answer the following:
+
+##F3.2.a
+
+*Fit a regression model with taste as the response and the three chemical contents as predictors. Identify the predictors that are statistically significant at the 5% level.*
+```{r F3.2.a}
+
+```
+
+##F3.2.b
+
+*Acetic and H2S are measured on a log scale. Fit a linear model where all three predictors are measured on their original scale. Identify the predictors that are statistically significant at the 5% level for this model.*
+```{r F3.2.b}
+
+```
+
+##F3.2.c
+
+*Can we use an F-test to compare these two models? Explain. Which model provides a better fit to the data? Explain your reasoning.*
+```{r F3.2.c}
+
+```
+
+##F3.2.d
+
+*If H2S is increased 0.01 for the model used in (a), what change in the taste would be expected?*
+
+```{r F3.2.d}
+
+```
+
+##F3.2.e
+
+*What is the percentage change in H2S on the original scale corresponding to an additive increase of 0.01 on the (natural) log scale?*
+
+H2S +.01
+
+exp(H2S+.01)/exp(H2S) = exp(H2S +.01-H2S)
+= exp(.01) = 1+.01 = 1.01
+
+pct change = 1%
+
+
+
+
+```{r F3.2.e}
+
+```
+
+##F3.4 
+Using the SAT data:
+
+##F3.4.a 
+Fit a model with total sat score as the response and expend, ratio and salary as predictors. Test the hypothesis that βsalary = 0. Test the hypothesis that βsalary = βratio = βexpend = 0. Do any of these predictors have an
+effect on the response?
+
+```{r 3.4.a}
+
+```
+
+##F3.4.b
+*Now add takers to the model. Test the hypothesis that βtakers = 0. Compare this model to the previous one using an F-test. Demonstrate that the F-test and t-test here are equivalent.*
+
+```{r 3.4.b}
+
+mod1 = lm(total~expend+ratio+salary,data=sat)
+mod2 = lm(total~expend+ratio+salary+takers,data=sat)
+anova(mod1,mod2)
+
+summary(mod2)
+
+
+
+```
+
+##F3.5
+Find a formula relating Rsq and the F-test for regression.
+
+$$ R^2 = 1-\frac{RSS}{SST} = \frac{SST-RSS}{SST}$$
+and $$1-R^2 = \frac{RSS}{SST} $$ 
+
+Then write 
+
+$$ F  = \frac{(SST-RSS)/(p-1)}{RSS/(n-p)} =\frac{(SST-RSS)}{RSS}\frac{n-p}{p-1} \\
+=\frac{(SST-RSS)}{SST}\frac{SST}{RSS}\frac{n-p}{p-1}\\
+= \frac{R^2}{1-R^2}\frac{n-p}{p-1}$$
+
+
+
+```{r F3.5}
+
+```
+
+
+##F3.6
+Thirty-nine MBA students were asked about happiness and how this related to their income and social life. The data are found in happy. Fit a regression model with happy as the response and the other four variables as predictors.
+
+
+##F3.6.a
+Which predictors were statistically significant at the 1% level?
+
+```{r F3.6.a}
+
+fit.mba = lm(happy~.,data=happy)
+summary(fit.mba)
+
+```
+
+##F3.6.b 
+*Use the table function to produce a numerical summary of the response. What assumption used to perform the t-tests seems questionable in light of this summary?*
+
+
+```{r F3.6.b}
+table(happy$happy)
+
+```
+
+##F3.6.c 
+*Use the permutation procedure described in Section 3.3 to test the significance of the money predictor.*
+
+```{r F3.6.c}
+
+nreps <- 4000
+set.seed(123)
+tstats <- numeric(nreps)
+for(i in 1:nreps){
+   lmods <- lm(happy ~ sample(money)+sex+love+work, happy)
+   tstats[i] <- summary(lmods)$coef[3,3]
+}
+mean(tstats > summary(fit.mba)$coef[3,3])
+
+```
+
+##F3.6.d
+*Plot a histgram of the permutation t-statistics. Make sure you use the the probability rather than frequency version of the histogram.*
+
+```{r F3.6.d}
+df = 34
+hist(tstats,freq=FALSE)
+grid = seq(-3,3,length=300)
+lines(grid,dt(grid,df=34))
+
+```
+
+##F3.6.e 
+*Overlay an appropriate t-density over the histogram. Hint: Use grid <- seq(-3, 3, length = 300) to create a grid of values, then use the dt function to compute the t-density on this grid and the lines function to superimpose the result.*
+
+```{r F3.6.e}
+
+```
+
+##F3.6.f 
+*Use the bootstrap procedure from Section 3.6 to compute 90% and 95% confidence intervals for βmoney. Does zero fall within these confidence intervals? Are these results consistent with previous tests?*
+
+```{r F3.6.f}
+
+```
+
+
+##F3.7
+
+*In the punting data, we find the average distance punted and hang times of 10 punts of an American football as related to various measures of leg strength for 13 volunteers.*
+
+##F3.7.a
+
+*Fit a regression model with Distance as the response and the right and left leg strengths and flexibilities as predictors. Which predictors are significant at the 5% level?*
+```{r F3.7.a}
+
+```
+
+##F3.7.b
+
+*Use an F-test to determine whether collectively these four predictors have a relationship to the response.*
+```{r F3.7.b}
+
+```
+
+##F3.7.c
+
+*Relative to the model in (a), test whether the right and left leg strengths have the same effect.*
+```{r F3.7.c}
+
+```
+
+##F3.7.d
+
+*Construct a 95% confidence region for *$(\beta_{RStr}, \beta_{LStr}) $*. Explain how the test in (c) relates to this region.*
+```{r F3.7.d}
+
+```
+
+##F3.7.e
+
+*Fit a model to test the hypothesis that it is total leg strength defined by adding the right and left leg strengths that is sufficient to predict the response in comparison to using individual left and right leg strengths.*
+```{r F3.7.e}
+
+```
+
+##F3.7.f
+
+*Relative to the model in (a), test whether the right and left leg flexibilities have the same effect.*
+```{r F3.7.f}
+
+```
+
+##F3.7.g
+
+*Test for left–right symmetry by performing the tests in (c) and (f) simultaneously.*
+```{r F3.7.g}
+
+```
+
+##F3.7.h
+
+*Fit a model with Hang as the response and the same four predictors. Can we make a test to compare this model to that used in (a)? Explain.*
+```{r F3.7.h}
+
+```
+
