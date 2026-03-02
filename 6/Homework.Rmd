@@ -1,0 +1,227 @@
+---
+title: "Stat538 - HW4"
+author: "FirstName LastName"
+output: pdf_document
+---
+
+```{r include=FALSE}
+
+#Press (Ctrl + Shift + the letter O) to see all double hashtags on the right of this window.
+
+#There is an r-chunk available for every question but that does NOT mean that an r-chunk is needed for each question.
+
+#Some questions will only require a written response.
+
+```
+
+##F4.2
+Using the teengamb data, fit a model with gamble as the response and the other variables as predictors.
+
+##F4.2.a
+ Predict the amount that a male with average (given these data) status, income and verbal score would gamble along with an appropriate 95% CI.
+
+```{r,F4.2.a}
+```
+
+##F4.2.b 
+Repeat the prediction for a male with maximal values (for this data) of status,income and verbal score. Which CI is wider and why is this result expected?
+
+```{r,F4.2.b}
+```
+
+##F4.2.c 
+
+Fit a model with sqrt(gamble) as the response but with the same predictors.
+Now predict the response and give a 95% prediction interval for the individual in (a). Take care to give your answer in the original units of the response.
+
+
+```{r,F4.2.c}
+```
+
+##F4.2.d 
+Repeat the prediction for the model in (c) for a female with status=20,
+income=1, verbal = 10. Comment on the credibility of the result.
+
+```{r,F4.2.d}
+```
+
+##F4.3
+
+The *snail* dataset contains percentage water content of the tissues of snails grown under three different levels of relative humidity and two different temperatures.
+
+##F4.3.a
+
+*Use the command *$xtabs(water \mathtt{\sim} temp + humid, snail)/4$ *to produce a table of mean water content for each combination of temperature and humidity. Can you use this table to predict the water content for a temperature of *$25^{\circ}C$ *and a humidity of 60%? Explain.*
+```{r F4.3.a}
+
+```
+
+##F4.3.b
+
+*Fit a regression model with the water content as the response and the temperature and humidity as predictors. Use this model to predict the water content for a temperature of *$25^{\circ}C$ *and a humidity of 60%?*
+```{r F4.3.b}
+
+```
+
+##F4.3.c
+
+*Use this model to predict water content for a temperature of *$30^{\circ}C$ *and a humidity of 75%? Compare your prediction to the prediction from (a). Discuss the relative merits of these two predictions.*
+```{r F4.3.c}
+
+```
+
+##F4.3.d
+
+*The intercept in your model is 52.6%. Give two values of the predictors for which this represents the predicted response. Is your answer unique? Do you think this represents a reasonable prediction?*
+```{r F4.3.d}
+
+```
+
+
+##F4.3.e
+
+*For a temperature of *$25^{\circ}C$ *what value of humidity would give a predicted response of 80% water content.*
+```{r F4.3.e}
+
+```
+
+
+##F4.4
+
+The dataset *mdeaths* reports the number of deaths from lung diseases for men in the UK from 1974 to 1979.
+
+##F4.4.a
+
+*Make an appropriate plot of the data. At what time of year are deaths most likely to occur?*
+```{r F4.4.a}
+
+```
+
+##F4.4.b
+
+*Fit an autoregressive model of the same form used for the airline data. Are all the predictors statistically significant?*
+```{r F4.4.b}
+
+```
+
+##F4.4.c
+
+*Use the model to predict the number of deaths in January 1980 along with a 95% prediction interval.*
+```{r F4.4.c}
+
+```
+
+##F4.4.d
+
+*Use your answer from the previous question to compute a prediction and confidence interval for February 1980.*
+```{r F4.4.d}
+
+```
+
+##F4.4.e
+
+*Compute the fitted values. Plot these against the observed values. Note that you will need to select the appropriate observed values. Do you think the accuracy of predictions will be the same for all months of the year?*
+```{r F4.4.e}
+
+```
+
+
+##F5.3
+
+Use the *teengamb* data for this question.
+
+##F5.3.a
+
+*Make a plot of gamble on income using a different plotting symbol depending on the sex.*
+```{r F5.3.a}
+
+```
+
+##F5.3.b
+
+*Fit a regression model with gamble as the response and income and sex as predictors. Display the regression fit on the plot.*
+```{r F5.3.b}
+
+```
+
+##F5.3.c
+
+*Use the Matching package to find matches on sex. Use the same parameters as in the chapter. How many matched pairs were found? How many cases were not matched?*
+```{r F5.3.c}
+
+```
+
+##F5.3.d
+
+*Make a plot showing which pairs were matched.*
+```{r F5.3.d}
+
+```
+
+##F5.3.e
+
+*Compute the differences in gamble for the matched pairs. Is there a significant non-zero difference?*
+```{r F5.3.e}
+
+```
+
+##F5.3.f
+
+*Plot the difference against income. In what proportion of pairs did the female gamble more than the male?*
+```{r F5.3.f}
+
+```
+
+##F5.3.g
+*Do the conclusions from the linear model and the matched pair approach agree?*
+```{r F5.3.g}
+
+```
+
+
+##F5.4
+
+Thirty-nine MBA students were asked about happiness and how this related to their income and social life. The data are found in *happy*.
+
+##F5.4.a
+
+*Fit a regression model with happy as the response and the other four variables as predictors. Give an interpretation for the meaning of the love coefficient.*
+```{r F5.4.a}
+
+```
+
+##F5.4.b
+
+*The love predictor takes three possible values but mostly takes the value 2 or 3. Create a new predictor called clove which takes the value zero if love is 2 or less. Use this new predictor to replace love in the regression model and interpret the meaning of the corresponding coefficient. Do the results differ much from the previous model?*
+```{r F5.4.b}
+
+```
+
+##F5.4.c
+
+*Fit a model with only clove as a predictor and interpret the coefficient. How do the results compare to the previous outcome.*
+```{r F5.4.c}
+
+```
+
+##F5.4.d
+
+*Make a plot of happy on work, distinguishing the value clove by using a plotting symbol. Use jittering to distinguish overplotted points.*
+```{r F5.4.d}
+
+```
+
+##F5.4.e
+
+*Use the command xtabs( ∼ clove + work, happy) to produce a crosstabulation. If we wanted to match pairs on clove with the same value of work, what is the maximum number of 1 to 1 matches we could achieve?*
+```{r F5.4.e}
+
+```
+
+##F5.4.f
+
+*For each value of work, compute the mean difference in happy for the two levels of clove. Compute an average of these differences. Which coefficient computed earlier would be the most appropriate comparison for this average?*
+```{r F5.4.f}
+
+```
+
