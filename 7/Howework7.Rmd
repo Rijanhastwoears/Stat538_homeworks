@@ -1,0 +1,134 @@
+---
+title: "Stat 538 - HW7"
+author: "FirstName LastName"
+output: pdf_document
+---
+
+```{r include=FALSE}
+
+#Press (Ctrl + Shift + the letter O) to see all double hashtags on the right of this window.
+
+#There is an r-chunk available for every question but that does NOT mean that an r-chunk is needed for each question.
+
+#Some questions will only require a written response.
+
+```
+
+
+
+##S6.5
+An avid fan of the PGA tour with limited background in statistics has sought your help in answering one of the age-old questions in golf, namely, what is the relative importance of each different aspect of the game on average prize money in professional golf ? The following data on the top 196 tour players in 2006 can be found on the book web site in the file *pgatour2006.csv*:
+
+*Y , Prize Money = average prize money per tournament*
+
+$x_1$ *, Driving Accuracy is the percent of time a player is able to hit the fairway with his tee shot.*
+
+$x_2$ *, GIR, Greens in Regulation is the percent of time a player was able to hit the green in regulation. A green is considered hit in regulation if any part of the ball is touching the putting surface and the number of strokes taken is two or less than par.*
+
+$x_3$ *, Putting Average measures putting performance on those holes where the green is hit in regulation (GIR). By using greens hit in regulation the effects of chipping close and one putting are eliminated.*
+
+$x_4$ *, Birdie Conversion% is the percent of time a player makes birdie or better after hitting the green in regulation.*
+
+$x_5$ *, SandSaves% is the percent of time a player was able to get “up and down” once in a greenside sand bunker.*
+
+$x_6$ *, Scrambling% is the percent of time that a player misses the green in regulation, but still makes par or better.*
+
+$x_7$ *, PuttsPerRound is the average total number of putts per round.*
+
+( *http://www.pgatour.com/r/stats/*; accessed March 13, 2007) 
+
+##S6.5.a
+
+*A statistician from Australia has recommended to the analyst that they not transform any of the predictor variables but that they transform Y using the log transformation. Do you agree with this recommendation? Give reasons to support your answer.*
+
+```{r S6.5.a}
+
+```
+
+##S6.5.b
+
+*Develop a valid full regression model containing all seven potential predictor variables listed above. Ensure that you provide justification for your choice of full model, which includes scatter plots of the data, plots of standardized residuals, and any other relevant diagnostic plots.*
+
+```{r S6.5.b}
+
+```
+
+##S6.5.c
+
+*Identify any points that should be investigated. Give one or more reasons to support each point chosen.*
+
+```{r S6.5.c}
+
+```
+
+##S6.5.d
+
+*Describe any weaknesses in your model.*
+
+```{r S6.5.d}
+
+```
+
+##S6.5.e
+
+*The golf fan wants to remove all predictors with insignificant t-values from the full model in a single step. Explain why you would not recommend this approach. *
+
+```{r S6.5.e}
+
+```
+
+
+## F7.3
+
+
+### F7.3.a
+
+*Fit a regression model with divorce as the response and unemployed, femlab, marriage, birth and military as predictors. Compute the condition numbers and interpret their meanings.*
+
+```{r F7.3.a}
+data("divusa")
+div.mod = lm(divorce~unemployed+femlab+marriage+birth+military,data=divusa)
+
+```
+
+### F7.3.b
+
+*For the same model, compute the VIFs. Is there evidence that collinearity causes some predictors not to be significant? Explain.*
+
+```{r F7.3.b}
+
+```
+
+### F7.3.c
+
+*Does the removal of insignificant predictors from the model reduce the collinearity? Investigate.*
+
+```{r F7.3.c}
+
+```
+
+
+## F7.4
+
+For the *longley* data, fit a model with Employed as the response and the other variables as predictors.
+
+### F7.4.a
+
+*Compute and comment on the condition numbers.*
+```{r F7.4.a}
+
+```
+
+### F7.4.b
+
+*Compute and comment on the correlations between the predictors.*
+```{r F7.4.b}
+
+```
+
+### F7.4.c
+
+*Compute the variance inflation factors.*
+```{r F7.4.c}
+
+```
