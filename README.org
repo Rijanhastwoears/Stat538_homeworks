@@ -1,3 +1,5 @@
 * General 
 
 Homework for assignments for STATS 538.
+
+One folder is one module.
