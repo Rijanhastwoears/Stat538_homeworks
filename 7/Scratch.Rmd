@@ -134,3 +134,103 @@ As we can see, the correlation matrix shows a strong positive correlation (0.79)
 ## S6.5.e
 
 It is generally a bad idea to remove points from a model for any reason other than feasibility (i.e. your data is incomputable because of size), let alone convenance. You could make the model unstable by removing various variables at once. The underlying data maybe too small to be useful or not capture a real spread of the underlying experiment. If the predictors are correlated then then it isn't always clear what the impact of something is. If the impact of one predictor is confounded by co-linearity with another then what seems insignificant in correlation is significant by itself.
+
+# 7.3
+
+## F7.3.a
+
+Data and model.
+
+```{r}
+library(faraway)
+data("divusa")
+div.mod = lm(divorce~unemployed+femlab+marriage+birth+military,data=divusa)
+```
+
+```{r}
+# Extract design matrix
+X <- model.matrix(div.mod)
+# Compute singular values
+s_vals <- svd(X)$d
+# Condition number
+print("The condition number is :")
+
+max(s_vals) / min(s_vals)
+
+# Eigenvalue-based condition numbers
+
+print("The eigenvalue based conditoin numbers are :")
+
+ev <- eigen(t(X) %*% X)$values
+sqrt(max(ev)/ev)
+```
+
+Where k>30 is indicates high levels multi-collinearity, k = 2258 indicates that something is deeply, disconcertingly wrong!
+
+## F7.3.b
+
+```{r}
+library(faraway)
+vif(div.mod)
+# Check significance
+summary(div.mod)
+```
+VIF values exceeding 5 or 10 indicate problematic collinearity. Here that is not the case and all VIF values are below 5.The two insignificant predictors are `unemployed` and `miliarty` and both theirs VIFs are below 5, even below 3. 
+
+
+```{R}
+# Example: removing 'unemployed' and 'military' if insignificant
+div.red <- lm(divorce ~ femlab + marriage + birth, data = divusa)
+
+# Compare VIFs
+vif(div.red)
+
+# Compare Condition Number
+X_red <- model.matrix(div.red)
+s_vals_red <- svd(X_red)$d
+max(s_vals_red) / min(s_vals_red)
+```
+
+Removing the 'insignificant' predictors from the previous model halved out condition number.So, the answer is yes. 
+
+# S7.4
+
+## S7.4.a
+
+```{R}
+data(longley)
+# Exclude response 'Employed' and intercept for standardization
+x <- as.matrix(longley[, -7])
+# Compute condition number for the scaled design matrix
+x_scaled <- scale(x)
+eigenvalues <- eigen(t(x_scaled) %*% x_scaled)$values
+cond_num <- sqrt(max(eigenvalues) / min(eigenvalues))
+print(cond_num)
+```
+
+The condition number 110.5442 (much, much higher than k > 30 convention), indicating that the predictors are nearly linearly dependent, which leads to unstable OLS estimates.
+
+## S7.4.b
+
+```{R}
+# Correlation matrix for predictors
+cor_matrix <- cor(longley[, -7])
+print(cor_matrix)
+
+# Identify pairs with correlation > 0.95
+high_cor <- which(abs(cor_matrix) > 0.95 & row(cor_matrix) < col(cor_matrix), arr.ind = TRUE)
+print(cor_matrix[high_cor])
+```
+
+Several predictors (e.g., GNP.deflator, GNP, and Population) exhibit correlations near 0.99. That validates that the structural relationship between the variables is the source of the high condition number.
+
+## S7.4.c
+
+Here are the VIF values
+
+```{r}
+model <- lm(Employed ~ ., data = longley)
+vif_values <- vif(model)
+print(vif_values)
+```
+
